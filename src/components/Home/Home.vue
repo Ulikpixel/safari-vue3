@@ -1,7 +1,5 @@
 <template>
-    <p class="text-2xl">
-        home    
-    </p>
+   <button-ui>PROCEED TO CHECKOUT</button-ui>
 </template>
 
 <script>

@@ -1,12 +1,12 @@
 <template>
-  <div>
-    <p>Delivery method</p>
-  </div>
+  <home-component />
 </template>
 
 <script>
+import HomeComponent from '@/components/Home/Home.vue';
 
 export default {
-  name: 'HomeView'
+  name: 'HomeView',
+  components: { HomeComponent }
 }
 </script>
