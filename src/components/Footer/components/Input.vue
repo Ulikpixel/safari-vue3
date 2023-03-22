@@ -9,7 +9,3 @@
         name: 'input-vue'
     }
 </script>
-
-<style lang="scss" scoped>
-
-</style>

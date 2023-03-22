@@ -9,7 +9,3 @@
         name: 'slider-ui'
     }
 </script>
-
-<style lang="scss" scoped>
-
-</style>

@@ -1,7 +1,17 @@
 <template>
-  <router-view/>
+  <header-component />
+  <router-view />
+  <footer-component />
 </template>
 
-<style>
+<script>
+import HeaderComponent from '@/components/Header/Header';
+import FooterComponent from '@/components/Footer/Footer';
 
-</style>
+export default {
+  components: {
+    HeaderComponent,
+    FooterComponent,
+  }
+}
+</script>

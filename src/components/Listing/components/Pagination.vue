@@ -9,7 +9,3 @@
         name: 'pagination-ui'
     }
 </script>
-
-<style lang="scss" scoped>
-
-</style>
