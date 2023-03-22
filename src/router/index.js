@@ -1,36 +1,21 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView'
-import AccessoriesView from '../views/AccessoriesView'
-import ShoesView from '../views/ShoesView'
-import ClothesView from '../views/ClothesView'
-import AuthView from '../views/AuthView'
+import HomeView from '@/views/HomeView'
+import AuthView from '@/views/AuthView'
+import ListingView from '@/views/ListingView';
 
 const routes = [
   {
     path: '/',
-    name: 'home',
     component: HomeView
   },
   {
-    path: '/listing/accessories',
-    name: 'accessories',
-    component: AccessoriesView
-  },
-  {
-    path: '/listing/shoes',
-    name: 'shoes',
-    component: ShoesView,
-  },
-  {
-    path: '/listing/clothes',
-    name: 'clothes',
-    component: ClothesView,
-  },
-  {
     path: '/auth',
-    name: 'auth',
     component: AuthView,
-  }
+  },
+  {
+    path: '/listing/:type',
+    component: ListingView,
+  },
 ]
 
 const router = createRouter({
