@@ -1,9 +1,19 @@
 <template>
-   <button-ui>PROCEED TO CHECKOUT</button-ui>
+   <checkbox-ui :checked="status" @click="setStatus" />
 </template>
 
 <script>
     export default {
-        name: 'home-view'
+        name: 'home-view',
+        data() {
+            return {
+                status: false,
+            }
+        },
+        methods: {
+            setStatus() {
+                this.status = !this.status
+            }
+        }   
     }
 </script>
