@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-col">
-        <label v-if="label?.length > 3" class="text-sm mb-2 md:mb-4" :class="{ 'text-red': error }">{{ label }}</label>
+        <label v-if="label?.length > 0" class="text-sm mb-2 md:mb-4" :class="{ 'text-red': error }">{{ label }}</label>
         <input
             type="text" 
             :value="value" 
