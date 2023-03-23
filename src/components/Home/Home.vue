@@ -1,5 +1,5 @@
 <template>
-   <checkbox-ui :checked="status" @click="setStatus" />
+   <input-ui label="email" :value="email" :onChange="getEmail" />
 </template>
 
 <script>
@@ -7,13 +7,13 @@
         name: 'home-view',
         data() {
             return {
-                status: false,
+                email: '',
             }
         },
         methods: {
-            setStatus() {
-                this.status = !this.status
+            getEmail(event) {
+                this.email = event.target.value;
             }
-        }   
+        }
     }
 </script>

@@ -27,4 +27,7 @@
     body {
         font-family: "Mulish", sans-serif;
     }
+    input, button, textarea {
+        outline: none;
+    }
 }

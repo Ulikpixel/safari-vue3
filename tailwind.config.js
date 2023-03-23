@@ -19,6 +19,9 @@ module.exports = {
     backgroundImage: {
       gold: 'linear-gradient(180deg, #F3B121 0%, rgba(255, 203, 90, 0.567708) 53.65%, #FFC954 100%)'
     },
+    boxShadow: {
+      'input-error': '2px -1px 7px 5px rgba(237,22,95,0.21)',
+    },
     extend: {},
   },
   plugins: [],
