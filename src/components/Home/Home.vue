@@ -1,10 +1,5 @@
 <template>
-    <select-ui
-        :options="options" 
-        :currentOption="option" 
-        @select="select" 
-        label="State/Province" 
-    />
+    <div></div>
 </template>
 
 <script>

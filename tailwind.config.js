@@ -22,6 +22,13 @@ module.exports = {
     boxShadow: {
       'input-error': '2px -1px 7px 5px rgba(237,22,95,0.21)',
     },
+    maxWidth: {
+      'small-container': '1066px',
+    },
+    container: {
+      padding: '20px',
+      center: true,
+    },
     extend: {},
   },
   plugins: [],
