@@ -21,6 +21,7 @@ module.exports = {
     },
     boxShadow: {
       'input-error': '2px -1px 7px 5px rgba(237,22,95,0.21)',
+      'card': '0px 0px 54px -23px rgba(0,0,0,0.7)',
     },
     maxWidth: {
       'small-container': '1066px',
