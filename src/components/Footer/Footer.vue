@@ -1,12 +1,10 @@
 <template>
     <footer class="min-h-[200px] py-5 bg-grey w-full flex items-center justify-center">
-        <div
-            class="
-                container flex items-center flex-wrap 
-                gap-y-10 flex-col justify-between text-center
-                md:flex-row md:items-start md:text-left
-            "
-        >
+        <div class="
+                    container flex items-center flex-wrap 
+                    gap-y-10 flex-col justify-between text-center
+                    md:flex-row md:items-start md:text-left
+                ">
             <img src="@/assets/icons/logo.svg" alt="icon">
             <div>
                 <p v-for="nav in navs" :key="nav">{{ nav }}</p>
@@ -23,7 +21,7 @@
             </div>
             <div>
                 <p class="mb-5">Subscribe to our newsletter</p>
-                <input-component :value="email" :change="getEmail" :clickBtn="sendEmail" />
+                <input-component :value="email" @change="email = $event.target.value" :clickBtn="sendEmail" />
             </div>
             <div>
                 <p v-for="text in address" :key="text">
@@ -36,29 +34,26 @@
 
 <script>
 import InputComponent from '@/components/Footer/components/Input.vue';
-
-const navs = ['About Us', 'Contact', 'Terms & Conditions'];
-const networks = ['Facebook', 'Twitter', 'Instagram'];
-const address = ['497 Evergreen Roseville, CA 95673', '+44 345 678 903', 'adobexd@mail.com'];
+import { ref } from 'vue';
 
 export default {
     name: 'footer-component',
-    data() {
+    setup() {
+        const navs = ['About Us', 'Contact', 'Terms & Conditions'];
+        const networks = ['Facebook', 'Twitter', 'Instagram'];
+        const address = ['497 Evergreen Roseville, CA 95673', '+44 345 678 903', 'adobexd@mail.com'];
+        const email = ref('');
+
+        const sendEmail = () => console.log(email.value);
+
         return {
             navs,
             networks,
             address,
-            email: '',
+            email,
+            sendEmail,
         }
     },
     components: { InputComponent },
-    methods: {
-        getEmail(event) {
-            this.email = event.target.value
-        },
-        sendEmail() {
-            console.log(this.email)
-        }
-    },
 }
 </script>

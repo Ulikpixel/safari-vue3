@@ -24,12 +24,15 @@
 
 <script>
 import HeartComponent from '@/components/UI/Card/components/Heart';
+import { ref } from 'vue';
 
 export default {
     name: 'card-ui',
-    data() {
+    setup() {
+        const hoverCard = ref(false);
+
         return {
-            hoverCard: false,
+            hoverCard
         }
     },
     props: {
@@ -40,18 +43,11 @@ export default {
         category: String,
         size: [String, Number],
         color: String,
+        setLike: Function, 
+        addBasket: Function,
     },
     components: {
         HeartComponent
     },
-    methods: {
-        setLike() {
-            if (this.like) return;
-            this.$emit('setLike');
-        },
-        addBasket() {
-            this.$emit('addBasket');
-        },
-    }
 }
 </script>

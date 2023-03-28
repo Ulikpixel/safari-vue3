@@ -13,9 +13,9 @@ export default {
             required: true
         }
     },
-    data() {
+    setup(props) {
         return {
-            path: icons[this.name],
+            path: icons[props.name],
         }
     }
 }
