@@ -11,8 +11,8 @@
         "
         :class="{
             [`
-                before:top-1/2 before:translate-y-[-50%] before:rotate-45
-                after:top-1/2 after:translate-y-[-50%] after:rotate-[-45deg]
+                before:rotate-45 before:top-[50%] before:translate-y-[-50%]
+                after:rotate-[-45deg] after:top-[50%] after:translate-y-[-50%]
             `]: isActive,
         }"
     >
