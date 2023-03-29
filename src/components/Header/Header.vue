@@ -2,11 +2,12 @@
     <header class="h-[70px] bg-grey">
         <div class="max-w-small-container relative m-auto px-5 flex items-center justify-between h-full">
             <nav class="
-                                absolute z-20 top-0 text-center h-screen flex items-center
-                                bg-pink w-80 flex-col gap-6 pt-14 text-white
-                                lg:gap-[50px] lg:relative lg:h-auto lg:pt-0 lg:text-black
-                                lg:bg-grey lg:w-auto lg:text-left lg:flex-row right-0 lg:flex
-                            " :class="{ 'block': navbar, 'hidden': !navbar }">
+                    absolute z-20 top-0 text-center h-screen flex items-center
+                    bg-pink w-80 flex-col gap-6 pt-14 text-white duration-500
+                    lg:gap-[50px] lg:relative lg:h-auto lg:pt-0 lg:text-black
+                  lg:bg-grey lg:w-auto lg:text-left lg:flex-row right-0 lg:flex lg:right-0
+                "
+                :class="{ 'right-0': navbar, 'right-[-350px]': !navbar }">
                 <router-link v-for="nav in navText" :to="nav.path" :key="nav.path" v-slot="{ isExactActive }">
                     <p :class="{ 'lg:text-pink': isExactActive }" class="font-bold relative">
                         {{ nav.text }}

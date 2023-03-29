@@ -1,9 +1,11 @@
 <template>
-  <header-component />
-  <main>
-    <router-view />
-  </main>
-  <footer-component />
+  <div class="overflow-x-hidden">
+    <header-component />
+    <main>
+      <router-view />
+    </main>
+    <footer-component />
+  </div>
 </template>
 
 <script>
