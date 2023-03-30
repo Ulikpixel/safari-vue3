@@ -4,6 +4,8 @@ import ButtonComponent from '@/components/UI/Button/Button';
 import SelectComponent from '@/components/UI/Select/Select';
 import PopupComponent from '@/components/UI/Popup/Popup';
 import CardComponent from '@/components/UI/Card/Card';
+import LoaderComponent from '@/components/UI/Loader/Loader';
+import PaginationComponent from '@/components/UI/Pagination/Pagination';
 import BaseIcon from '@/components/UI/BaseIcon/BaseIcon';
 
 export default [
@@ -14,4 +16,6 @@ export default [
     PopupComponent,
     BaseIcon,
     CardComponent,
+    LoaderComponent,
+    PaginationComponent
 ];

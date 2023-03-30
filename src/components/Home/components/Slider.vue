@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full bg-pink relative min-h-[550px] lg:min-h-[1096px]">
+    <div class="w-full bg-pink relative min-h-[550px] lg:min-h-[1096px] pb-9">
         <div class="container">
             <img src="@/assets/images/logo.png" alt="logo"
                 class="absolute top-0 left-1/2 w-3/5 translate-x-[-50%] mt-[8.7em]" />
@@ -17,6 +17,13 @@
                     />
                 </template>
             </carousel>
+            <div class="flex flex-col justify-center items-center">
+                <p class="md:text-3xl text-white mb-4">Explore our collection</p>
+                <div class="flex flex-col justify-center items-center cursor-pointer">
+                    <div class="w-3 h-3 border-white border-[3px] rounded-full mb-1.5"></div>
+                    <img src="@/assets/icons/arrow-white.svg" alt="arrow">
+                </div>
+            </div>
         </div>
     </div>
 </template>
