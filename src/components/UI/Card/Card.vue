@@ -16,7 +16,7 @@
             <p>{{ name }}</p>
             <p class="flex items-center">
                 <base-icon name="currency" class="w-4" />
-                {{ price.toLocaleString("en-US", { currency: "USD" }) }}
+                {{ parsePrice(price) }}
             </p>
         </div>
     </div>
@@ -24,6 +24,7 @@
 
 <script>
 import HeartComponent from '@/components/UI/Card/components/Heart';
+import { parsePrice } from '@/util/parsePrice';
 import { ref } from 'vue';
 
 export default {
@@ -32,7 +33,7 @@ export default {
         const hoverCard = ref(false);
 
         return {
-            hoverCard
+            hoverCard, parsePrice
         }
     },
     props: {
