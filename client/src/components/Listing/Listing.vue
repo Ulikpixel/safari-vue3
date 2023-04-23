@@ -7,10 +7,10 @@
             <div class="flex flex-col justify-between items-start gap-12 lg:flex-row">
                 <aside class="w-full lg:max-w-[300px]">
                     <filter-component
-                        :category="filterData.category"
-                        :sizes="filterData.sizes"
-                        :colors="filterData.colors"
-                        :prices="filterData.prices"
+                        :category="filterData[$route.params.type].category"
+                        :sizes="filterData[$route.params.type].sizes"
+                        :colors="filterData[$route.params.type].colors"
+                        :prices="filterData[$route.params.type].prices"
                     />
                 </aside>
                 <div class="pb-5 w-full">
@@ -52,22 +52,18 @@ import { request } from '@/util/api';
 import { ref, onMounted, watch } from 'vue';
 import FilterComponent from '@/components/Listing/components/Filter/Filter';
 import { LISTING_FILTER } from '@/components/Listing/constants';
-import { useRoute } from 'vue-router';
 
 export default {
     name: 'listing-component',
     components: { FilterComponent },
     setup() {
-        const route = useRoute();
         const currentOption = ref('Most popular');
         const goods = ref([]);
         const isLoading = ref(false);
         const currentDot = ref(1);
         const goodsTotal = ref(0);
         const isError = ref(false);
-        const typeListing = route.params.type;
 
-        const FILTER = LISTING_FILTER[typeListing];
         const options = [
             { name: 'Most popular', value: 'Most popular' },
             { name: 'Best Selling', value: 'Best Selling' },
@@ -79,10 +75,11 @@ export default {
         const setCurrent = (value) => currentDot.value = value;
         const getProducts = async ({ page }) => {
             isLoading.value = true;
+            isError.value = false;
             try {
                 const { data } = await request.get(`/product/list/?limit=12&page=${page}`);
 
-                goods.value = [...data.results, ...data.results, ...data.results, ...data.results];
+                goods.value = data.results;
                 goodsTotal.value = Math.ceil(data.total / 3);
             } catch (err) {
                 isError.value = true;
@@ -93,12 +90,18 @@ export default {
 
         onMounted(async () => {
             await getProducts({ page: currentDot.value });
+            console.log('hello')
         });
 
         watch([currentOption, currentDot], async (newValue) => { // filter
             const [currentOption, currentDot] = newValue;
-            const uri = `?sort=${currentDot.value}&page=${currentOption.value}&limit=12`;
-            console.log(uri);
+            const params = {
+                sort: currentDot.value,
+                page: currentOption.value,
+                limit: 12,
+            };
+
+            console.log(params);
         })
 
         return {
@@ -110,7 +113,7 @@ export default {
             currentDot,
             goodsTotal,
             setCurrent,
-            filterData: FILTER,
+            filterData: LISTING_FILTER,
         };
     },
 }
