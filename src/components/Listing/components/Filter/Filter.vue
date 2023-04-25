@@ -62,6 +62,7 @@ export default {
         colors: Array,
         prices: Array,
     },
+
     setup() {
         return {
             parsePrice

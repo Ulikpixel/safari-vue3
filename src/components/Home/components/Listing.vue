@@ -18,16 +18,6 @@
                     </div>
                 </div>
             </div>
-            <div class="md:hidden" v-if="!isLoading">
-                <carousel :items-to-show="1">
-                    <slide v-for="good in goods" :key="good.id">
-                        <card-ui :name="good.name" :image="good.image" :price="good.price" />
-                    </slide>
-                    <template #addons>
-                        <navigation />
-                    </template>
-                </carousel>
-            </div>
         </div>
     </div>
 </template>
@@ -36,8 +26,6 @@
 <script>
 import { request } from '@/util/api';
 import { ref, onMounted, watch } from 'vue';
-import 'vue3-carousel/dist/carousel.css'
-import { Carousel, Slide, Navigation } from 'vue3-carousel';
 
 export default {
     name: 'listing-component',
@@ -73,10 +61,5 @@ export default {
 
         return { goods, isLoading, current, setCurrent, total, isError }
     },
-    components: {
-        Carousel,
-        Slide,
-        Navigation,
-    }
 }
 </script>
