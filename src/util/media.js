@@ -1,0 +1,1 @@
+export const minWidth = (width) => window.matchMedia(`(min-width: ${width}px)`).matches;

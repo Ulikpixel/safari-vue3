@@ -32,7 +32,7 @@ module.exports = {
       padding: '20px',
       center: true,
       screens: {
-        lg: '1339px'
+        lg: '1390px'
       },
     },
     extend: {},

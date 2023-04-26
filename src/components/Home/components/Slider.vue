@@ -19,7 +19,10 @@
             </carousel>
             <div class="flex flex-col justify-center items-center">
                 <p class="md:text-3xl text-white mb-4">Explore our collection</p>
-                <div class="flex flex-col justify-center items-center cursor-pointer">
+                <div
+                    class="flex flex-col justify-center items-center cursor-pointer"
+                    @click="bottomToScroll"
+                >
                     <div class="w-3 h-3 border-white border-[3px] rounded-full mb-1.5"></div>
                     <img src="@/assets/icons/arrow-white.svg" alt="arrow">
                 </div>
@@ -31,6 +34,7 @@
 <script>
 import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide, Pagination } from 'vue3-carousel'
+import { minWidth } from '@/util/media';
 
 export default {
     name: 'slider-component',
@@ -39,7 +43,17 @@ export default {
         Slide,
         Pagination,
     },
-
+    setup() {
+        const bottomToScroll = () => {
+            if(minWidth('768')){
+                window.scrollTo(0, 1100)
+            } else {
+                window.scrollTo(0, 700)
+            }
+        };
+        
+        return { bottomToScroll };
+    },
 }
 </script>
 
