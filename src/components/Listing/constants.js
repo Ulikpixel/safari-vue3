@@ -1,9 +1,18 @@
 const COLORS = [
-    'Beige', 'Blue', 'Black',
-    'Orange', 'Green', 'Brown',
-    'Purple', 'Gold', 'Taupe',
-    'White', 'Pink', 'Red',
+    { text: 'Beige', class: 'bg-beige' },
+    { text: 'Blue', class: 'bg-blue' },
+    { text: 'Black', class: 'bg-black' },
+    { text: 'Orange', class: 'bg-orange' }, 
+    { text: 'Green', class: 'bg-green' },
+    { text: 'Brown', class: 'bg-brown' },
+    { text: 'Purple', class: 'bg-purple' },
+    { text: 'Gold', class: 'bg-gold' },
+    { text: 'Taupe', class: 'bg-taupe' },
+    { text: 'white', class: 'bg-white border' },
+    { text: 'Pink', class: 'bg-pink' },
+    { text: 'Red', class: 'bg-red' },
 ];
+
 
 const PRICES = [
     { from: 0, to: 10000 },

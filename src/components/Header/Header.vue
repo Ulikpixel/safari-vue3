@@ -3,7 +3,7 @@
         <div class="max-w-small-container relative m-auto px-5 flex items-center justify-between h-full">
             <nav
                 class="
-                    absolute z-20 top-0 text-center h-screen flex items-center
+                    absolute z-[40] lg:z-0 top-0 text-center h-screen flex items-center
                     bg-pink w-80 flex-col gap-6 pt-14 text-white duration-500
                     lg:gap-[50px] lg:relative lg:h-auto lg:pt-0 lg:text-black
                   lg:bg-grey lg:w-auto lg:text-left lg:flex-row right-0 lg:flex lg:right-0
@@ -60,7 +60,7 @@
                     <base-icon :name="nav.icon" class="w-4 h-4 hover:text-pink" :class="{ 'text-pink': isExactActive }" />
                 </router-link>
             </nav>
-            <burger-component :isActive="navbar" class="lg:hidden z-30" @click="navbar = !navbar" />
+            <burger-component :isActive="navbar" class="lg:hidden z-[999]" @click="navbar = !navbar" />
         </div>
         <modal-component :good="modalGood" @close="modalGood = null" />
         <popup-ui v-if="modalGood" @click="modalGood = null" />

@@ -20,6 +20,7 @@
                 <div class="flex justify-center items-center">
                     <pagination-ui :items="total" :current="page" @setPage="setCurrent" />
                 </div>
+                <up-ui class="mx-auto lg:mx-0 lg:ml-auto" />
             </div>
         </div>
     </div>
