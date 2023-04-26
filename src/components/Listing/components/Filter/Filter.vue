@@ -34,6 +34,7 @@
                     class="
                         w-[54px] h-8 flex justify-center items-center rounded-sm
                         border cursor-pointer hover:text-white hover:bg-pink
+                        overflow-hidden
                     "
                 >
                     {{ size }}

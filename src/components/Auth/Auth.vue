@@ -1,5 +1,5 @@
 <template>
-    <p class="text-2xl">
+    <p class="text-2xl text-center">
         Auth
     </p>
 </template>
