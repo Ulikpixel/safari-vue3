@@ -68,6 +68,12 @@ export default {
     name: 'listing-component',
     components: { FilterComponent },
     setup() {
+        const defaultFilterState = {
+            category: null,
+            size: null, 
+            color: null,
+            price: null,
+        }
         const sort = ref('Most popular');
         const goods = ref([]);
         const isLoading = ref(false);
@@ -75,12 +81,7 @@ export default {
         const goodsTotal = ref(0);
         const isError = ref(false);
         const route = useRoute();
-        const filterState = ref({
-            category: null,
-            size: null, 
-            color: null,
-            price: null,
-        });
+        const filterState = ref(defaultFilterState);
 
         const optionsSort = [
             { name: 'Most popular', value: 'Most popular' },
@@ -101,7 +102,7 @@ export default {
                     params: { 
                         ...params, 
                         limit, 
-                        types: route.params.type, 
+                        types: route.params.type,
                     }
                 });
 
@@ -124,11 +125,20 @@ export default {
 
         watch([sort, page, filterState, route], async (newValue) => {
             const [, page, filterState, route] = newValue;
-            const params = { page, ...filterState, types: route.params.type, };
-            
-            const response = await getProducts(params);
-            console.log(response);
+            const params = {
+                page, 
+                types: route.params.type, 
+                ...filterState,
+                ...(filterState?.price && { 
+                    price_to: filterState.price.to,
+                    price_from: filterState.price.from, 
+                }) 
+            };
+  
+            await getProducts(params);
         })
+
+        watch(route, () => filterState.value = defaultFilterState);
 
         return {
             optionsSort,
