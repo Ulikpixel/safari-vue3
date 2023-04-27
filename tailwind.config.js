@@ -17,6 +17,7 @@ module.exports = {
       red: '#D23C47',
       'grey-text': '#686868',
       'clear-text': '#C4C4C4',
+      disabled: '#bfbcb4',
     },
     backgroundImage: {
       gold: 'linear-gradient(180deg, #F3B121 0%, rgba(255, 203, 90, 0.567708) 53.65%, #FFC954 100%)'
