@@ -10,6 +10,7 @@
                         :state="filterState" 
                         :data="filterData[$route.params.type]"
                         @setFilter="setFilter"
+                        @getPrice="setPrice"
                     />
                 </aside>
                 <div class="pb-5 w-full">
@@ -30,7 +31,7 @@
                         <card-ui
                             v-for="good in goods"
                             :key="good.id"
-                            :name="good.name"
+                            :name="good.title"
                             :price="good.price"
                             :image="good.image"
                         />
@@ -74,7 +75,7 @@ export default {
             color: null,
             price: null,
         }
-        const sort = ref('Most popular');
+        const sort = ref('-price');
         const goods = ref([]);
         const isLoading = ref(false);
         const page = ref(1);
@@ -84,10 +85,9 @@ export default {
         const filterState = ref(defaultFilterState);
 
         const optionsSort = [
-            { name: 'Most popular', value: 'Most popular' },
-            { name: 'Best Selling', value: 'Best Selling' },
-            { name: 'Price: High to Low', value: 'Price: High to Low' },
-            { name: 'Price: Low to High', value: 'Price: Low to High' },
+            { name: 'Most popular', value: 'likes' },
+            { name: 'Price: High to Low', value: 'price' },
+            { name: 'Price: Low to High', value: '-price' },
         ];
         const limit = minWidth('768') ? 12 : 4;
 
@@ -95,7 +95,7 @@ export default {
 
         const setPage = (value) => page.value = value;
 
-        const getProducts = async (params = { page: 1 }) => {
+        const getProducts = async (params = { page: 1, ordering: 'likes' }) => {
             isLoading.value = true; 
             try {
                 const { data } = await request.get('goods',{ 
@@ -119,6 +119,8 @@ export default {
             filterState.value = { ...filterState.value, [key]: data };
         };
 
+        const setPrice = (price) => filterState.value = { ...filterState.value, price };
+
         onMounted(async () => {
             await getProducts();
         }); 
@@ -127,14 +129,12 @@ export default {
             const [, page, filterState, route] = newValue;
             const params = {
                 page, 
-                types: route.params.type, 
+                types: route.params.type,
+                ordering: sort.value,
                 ...filterState,
-                ...(filterState?.price && { 
-                    price_to: filterState.price.to,
-                    price_from: filterState.price.from, 
-                }) 
+                ...(filterState?.price && filterState.price),
             };
-  
+
             await getProducts(params);
         })
 
@@ -152,6 +152,7 @@ export default {
             filterData: LISTING_FILTER,
             filterState,
             setFilter,
+            setPrice,
         };
     },
 }

@@ -89,8 +89,8 @@ export default {
             isLoading.value = true;
 
             try {
-                const response = await request.get('goods', { params: data }); // сделать потом
-
+                const response = await request.post('/auth', data); // сделать потом
+                console.log(response)
                 isLoading.value = false;
 
                 LocalStorage.set('isAuth', response.data);

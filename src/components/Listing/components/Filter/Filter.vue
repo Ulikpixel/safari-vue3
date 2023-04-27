@@ -71,41 +71,44 @@
             :value="state.price"
             :clear="() => setFilter('price', null)"
         >
-            <ul class="flex flex-col gap-4">
+            <ul class="flex flex-col gap-4 mb-3">
                 <li 
                     v-for="price in data.prices" 
-                    :key="price.to" 
+                    :key="price.price_to" 
                     class="flex gap-4 cursor-pointer"
                     @click="setFilter('price', price)"
                 >
                     <checkbox-ui
-                        :checked="price.from === state?.price?.from && price.to === state?.price?.to" 
+                        :checked="price.price_from === state?.price?.price_from && price.price_to === state?.price?.price_to" 
                     />
                     <div class="flex gap-4 font-bold">
                         <p class="flex">
                             <base-icon name="currency" class="w-3" />
-                            {{ parsePrice(price.from) }}
+                            {{ parsePrice(price.price_from) }}
                         </p>
                         <p>-</p>
                         <p class="flex">
                             <base-icon name="currency" class="w-3" />
-                            {{ parsePrice(price.to) }}
+                            {{ parsePrice(price.price_to) }}
                         </p>
                     </div>
                 </li>
             </ul>
+            <priceform-component @getPrice="getPrice" />
         </dropdown-component>
     </div>
 </template>
 
 <script>
 import DropdownComponent from '@/components/Listing/components/Filter/components/Dropdown';
+import PriceformComponent from '@/components/Listing/components/Filter/components/PriceForm';
 import { parsePrice } from '@/util/parsePrice';
 
 export default {
     name: 'filter-component',
     components: {
-        DropdownComponent
+        DropdownComponent,
+        PriceformComponent
     },
     props: {
         data: {
@@ -133,9 +136,12 @@ export default {
             emit('setFilter', key, data)
         };
 
+        const getPrice = (prices) => emit('getPrice', prices);
+
         return {
             parsePrice,
             setFilter,
+            getPrice,
         }
     }
 }

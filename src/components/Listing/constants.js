@@ -15,11 +15,11 @@ const COLORS = [
 
 
 const PRICES = [
-    { from: 0, to: 10000 },
-    { from: 10000, to: 20000 },
-    { from: 20000, to: 50000 },
-    { from: 50000, to: 100000 },
-    { from: 100000, to: 200000 },
+    { price_from: 0, price_to: 10000 },
+    { price_from: 10000, price_to: 20000 },
+    { price_from: 20000, price_to: 50000 },
+    { price_from: 50000, price_to: 100000 },
+    { price_from: 100000, price_to: 200000 },
 ];
 
 export const LISTING_FILTER = {
