@@ -4,11 +4,11 @@
             <p class="text-xl font-bold mb-8">SIGN IN</p>
             <form class="flex flex-col gap-8" @submit.prevent>
                 <input-ui 
-                    label="Email"
-                    type="email" 
-                    :value="body.email" 
-                    @getValue="body.email = $event.target.value"
-                    :error="check('email')"
+                    label="Username"
+                    type="text" 
+                    :value="body.username" 
+                    @getValue="body.username = $event.target.value"
+                    :error="check('username')"
                 />
                 <input-ui 
                     label="Password" 
@@ -74,23 +74,23 @@ export default {
         const check = (key) => errors.value.includes(key);
 
         const sendRequest = async () => {
-            const isEmail = body.value.email.length <= 4;
+            const isUsername = body.value.username.length <= 4;
             const isPassword = body.value.password.length <= 4;
 
-            if (isEmail) setError('email');
+            if (isUsername) setError('username');
             if (isPassword) setError('password');
             if (errors.value.length > 0) return;
 
             const data = {
-                email: body.value.email,
+                username: body.value.username,
                 password: body.value.password
             };
 
             isLoading.value = true;
 
             try {
-                const response = await request.post('/auth', data); // сделать потом
-                console.log(response)
+                const response = await request.post('/auth/', data); // сделать потом
+
                 isLoading.value = false;
 
                 LocalStorage.set('isAuth', response.data);

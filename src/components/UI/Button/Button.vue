@@ -6,7 +6,7 @@
             hover:bg-white hover:text-black hover:border-1
             hover:border-pink hover:border duration-500
         "
-        :class="{ '!bg-disabled pointer-events-none': disabled }"
+        :class="{ '!bg-pink-disabled pointer-events-none': disabled }"
     >
         <slot></slot>
     </button>
