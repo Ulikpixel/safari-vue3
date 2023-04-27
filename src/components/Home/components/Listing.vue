@@ -23,6 +23,7 @@
                 <up-ui class="mx-auto lg:mx-0 lg:ml-auto" />
             </div>
         </div>
+        <p @click="setAuth">auth</p>
     </div>
 </template>
 
@@ -31,6 +32,7 @@
 import { request } from '@/util/api';
 import { minWidth } from '@/util/media';
 import { ref, onMounted, watch } from 'vue';
+import { useRouter } from 'vue-router';
 
 export default {
     name: 'listing-component',
@@ -41,6 +43,7 @@ export default {
         const page = ref(1);
         const total = ref(0);
         const limit = minWidth('768') ? 16 : 4;
+        const router = useRouter();
 
         const setCurrent = (value) => page.value = value;
         const getProducts = async (page) => {
@@ -62,6 +65,8 @@ export default {
             }
         };
 
+        const setAuth = () => router.push('/auth');
+
         onMounted(async () => {
             await getProducts(page.value);
         });
@@ -70,7 +75,7 @@ export default {
             await getProducts(newValue);
         });
 
-        return { goods, isLoading, page, setCurrent, total, isError }
+        return { goods, isLoading, page, setCurrent, total, isError, setAuth }
     },
 }
 </script>
