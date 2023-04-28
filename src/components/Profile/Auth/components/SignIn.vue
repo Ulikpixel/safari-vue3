@@ -59,33 +59,29 @@ import { useStore } from 'vuex';
 export default {
     name: 'sign-in',
     setup() {
-        const errors = ref([]);
+        const errorFields = ref([]);
         const isError = ref(false);
         const isLoading = ref(false);
         const store = useStore();
         const body = ref({
-            email: '',
+            username: '',
             password: '',
             save: false,
         });
 
-        const setError = (value) => errors.value = [...errors.value, value];
-
-        const check = (key) => errors.value.includes(key);
+        const check = (key) => errorFields.value.includes(key);
 
         const sendRequest = async () => {
-            const isUsername = body.value.username.length <= 4;
-            const isPassword = body.value.password.length <= 4;
-
-            if (isUsername) setError('username');
-            if (isPassword) setError('password');
-            if (errors.value.length > 0) return;
-
+            const required = ['username', 'password'];
             const data = {
                 username: body.value.username,
                 password: body.value.password
             };
+            const errors = required.filter((key) => body.value[key]?.length <= 4);
+            errorFields.value = errors;
 
+            if(errors.length > 0) return;
+            
             isLoading.value = true;
 
             try {
@@ -112,7 +108,7 @@ export default {
         }
 
         watch(body.value, () => {
-            errors.value = [];
+            errorFields.value = [];
         })
 
         onMounted(() => {

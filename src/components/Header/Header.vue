@@ -15,6 +15,7 @@
                     :to="nav.path" 
                     :key="nav.path" 
                     v-slot="{ isExactActive }"
+                    @click="navbar = false"
                 >
                     <p 
                         :class="{ 'text-brown lg:text-pink': isExactActive }" 
@@ -29,11 +30,12 @@
                     :to="nav.path" 
                     :key="nav.path"
                     v-slot="{ isExactActive }"
+                    @click="navbar = false"
                 >
                     <base-icon 
                         :name="nav.icon" 
                         class="w-4 h-4 text-white" 
-                        :class="{ 'text-brown': isExactActive }"
+                        :class="{ '!text-brown': isExactActive }"
                     />
                     <div
                         v-if="nav.icon === 'basket' && $store.state.goodsBasketQuantity > 0"

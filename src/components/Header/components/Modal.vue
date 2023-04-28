@@ -14,7 +14,7 @@
         />
         <card-ui
             :key="good.id"
-            :good="good"
+            :data="good"
         />
     </div>
 </template>
