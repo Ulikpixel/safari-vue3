@@ -17,18 +17,10 @@
                     v-slot="{ isExactActive }"
                 >
                     <p 
-                        :class="{ 'lg:text-pink': isExactActive }" 
+                        :class="{ 'text-brown lg:text-pink': isExactActive }" 
                         class="font-bold relative"
                     >
                         {{ nav.text }}
-                        <span 
-                            v-if="isExactActive" 
-                            class="
-                                absolute bottom-[-5px] left-1/2 bg-white
-                                transform translate-x-[-50%] w-[150%] h-px 
-                                lg:bg-pink lg:bottom-[-12px]
-                            "
-                        ></span>
                     </p>
                 </router-link>
                 <router-link 
@@ -40,8 +32,8 @@
                 >
                     <base-icon 
                         :name="nav.icon" 
-                        class="w-4 h-4 hover:text-white" 
-                        :class="{ 'text-pink': isExactActive }" 
+                        class="w-4 h-4 text-white" 
+                        :class="{ 'text-brown': isExactActive }"
                     />
                 </router-link>
             </nav>
@@ -55,9 +47,18 @@
                     @getGood="showGood"
                     @search="search" 
                 />
-                <router-link class="hidden lg:block" v-for="nav in navIcon" :to="nav.path" :key="nav.path"
-                    v-slot="{ isExactActive }">
-                    <base-icon :name="nav.icon" class="w-4 h-4 hover:text-pink" :class="{ 'text-pink': isExactActive }" />
+                <router-link 
+                    v-for="nav in navIcon" 
+                    class="hidden lg:block" 
+                    :to="nav.path" 
+                    :key="nav.path"
+                    v-slot="{ isExactActive }"
+                >
+                    <base-icon 
+                        :name="nav.icon" 
+                        class="w-4 h-4 hover:text-pink" 
+                        :class="{ 'lg:text-pink': isExactActive }" 
+                    />
                 </router-link>
             </nav>
             <burger-component :isActive="navbar" class="lg:hidden z-[999]" @click="navbar = !navbar" />
@@ -88,7 +89,6 @@ export default {
         const navIcon = [
             { icon: 'profile', path: '/profile' },
             { icon: 'basket', path: '/basket' },
-            { icon: 'heart', path: '/heart' },
         ];
 
         const navbar = ref(false);

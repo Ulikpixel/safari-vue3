@@ -95,7 +95,7 @@ export default {
 
                 LocalStorage.set('isAuth', response.data);
                 
-                router.push({ path: '/' });
+                router.push({ path: '/profile' });
 
                 if(body.value.save) {
                     LocalStorage.set('auth_data', data)
