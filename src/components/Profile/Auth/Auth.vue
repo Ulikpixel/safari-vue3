@@ -20,9 +20,9 @@
 
 <script>
 import { ref } from 'vue';
-import TabsComponent from '@/components/Auth/components/Tabs';
-import SignupComponent from '@/components/Auth/components/SignUp';
-import SigninComponent from '@/components/Auth/components/SignIn';
+import TabsComponent from '@/components/Profile/Auth/components/Tabs';
+import SignupComponent from '@/components/Profile/Auth/components/SignUp';
+import SigninComponent from '@/components/Profile/Auth/components/SignIn';
 
 export default {
     name: 'auth-component',

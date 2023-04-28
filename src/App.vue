@@ -12,7 +12,8 @@
 import HeaderComponent from '@/components/Header/Header';
 import FooterComponent from '@/components/Footer/Footer';
 import { LocalStorage } from '@/util/localStorage';
-import { onBeforeMount, ref } from 'vue';
+import { onBeforeMount } from 'vue';
+import { useStore } from 'vuex';
 
 export default {
   components: {
@@ -20,13 +21,11 @@ export default {
     FooterComponent,
   },
   setup() {
-    const isAuth = ref(false);
+    const store = useStore();
     
     onBeforeMount(() => {
-      isAuth.value = LocalStorage.get('isAuth');
+      store.commit('setAuth',  LocalStorage.get('isAuth'));
     })
-
-    return { isAuth };
   },
 };
 </script>

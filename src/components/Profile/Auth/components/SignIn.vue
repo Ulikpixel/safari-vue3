@@ -54,7 +54,7 @@
 import { request } from '@/util/api';
 import { LocalStorage } from '@/util/localStorage';
 import { onMounted, ref, watch } from 'vue';
-import { useRouter } from 'vue-router';
+import { useStore } from 'vuex';
 
 export default {
     name: 'sign-in',
@@ -62,7 +62,7 @@ export default {
         const errors = ref([]);
         const isError = ref(false);
         const isLoading = ref(false);
-        const router = useRouter();
+        const store = useStore();
         const body = ref({
             email: '',
             password: '',
@@ -94,8 +94,7 @@ export default {
                 isLoading.value = false;
 
                 LocalStorage.set('isAuth', response.data);
-                
-                router.push({ path: '/profile' });
+                store.commit('setAuth',  response.data);
 
                 if(body.value.save) {
                     LocalStorage.set('auth_data', data)

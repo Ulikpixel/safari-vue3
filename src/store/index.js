@@ -1,14 +1,18 @@
 import { createStore } from 'vuex'
+import { orderModule } from '@/store/modules/order';
 
 export default createStore({
   state: {
+    isAuth: 'asdsad',
   },
-  getters: {
-  },
+  getters: {},
   mutations: {
+    setAuth(state, value) {
+      state.isAuth = value
+    },
   },
-  actions: {
-  },
+  actions: {},
   modules: {
-  }
+    order: orderModule,
+  },
 })
