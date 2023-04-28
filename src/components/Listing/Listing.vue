@@ -28,13 +28,7 @@
                             justify-center lg:justify-start
                         "
                     >
-                        <card-ui
-                            v-for="good in goods"
-                            :key="good.id"
-                            :name="good.title"
-                            :price="good.price"
-                            :image="good.image"
-                        />
+                        <card-ui v-for="good in goods" :key="good.id" :data="good" />
                     </div>
                     <div class="text-center" v-if="!isLoading && goods.length === 0">
                         <p class="font-semibold text-2xl text-pink">Ничего не найдено!</p>

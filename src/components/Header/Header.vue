@@ -24,7 +24,7 @@
                     </p>
                 </router-link>
                 <router-link 
-                    class="block lg:hidden" 
+                    class="block lg:hidden relative" 
                     v-for="nav in navIcon" 
                     :to="nav.path" 
                     :key="nav.path"
@@ -35,6 +35,12 @@
                         class="w-4 h-4 text-white" 
                         :class="{ 'text-brown': isExactActive }"
                     />
+                    <div
+                        v-if="nav.icon === 'basket' && $store.state.goodsBasketQuantity > 0"
+                        class="absolute top-2 left-2 bg-purple p-1 rounded-full"
+                    >
+                        <p class="text-xs text-white">{{ allQuantity }}</p>
+                    </div>
                 </router-link>
             </nav>
             <img src="@/assets/icons/logo.svg" class="w-[70px] hidden lg:block" alt="icon" />
@@ -49,7 +55,7 @@
                 />
                 <router-link 
                     v-for="nav in navIcon" 
-                    class="hidden lg:block" 
+                    class="hidden lg:block relative" 
                     :to="nav.path" 
                     :key="nav.path"
                     v-slot="{ isExactActive }"
@@ -59,6 +65,12 @@
                         class="w-4 h-4 hover:text-pink" 
                         :class="{ 'lg:text-pink': isExactActive }" 
                     />
+                    <div
+                        v-if="nav.icon === 'basket' && $store.state.goodsBasketQuantity > 0"
+                        class="absolute top-2 left-2 bg-purple p-1 rounded-full"
+                    >
+                        <p class="text-xs text-white">{{ allQuantity }}</p>
+                    </div>
                 </router-link>
             </nav>
             <burger-component :isActive="navbar" class="lg:hidden z-[999]" @click="navbar = !navbar" />
@@ -73,8 +85,11 @@
 import SearchComponent from '@/components/Header/components/Search';
 import BurgerComponent from '@/components/Header/components/Burger';
 import ModalComponent from '@/components/Header/components/Modal';
-import { ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { request } from '@/util/api';
+import { getQuantityGoods } from '@/util/getQuantityGoods';
+import { LocalStorage } from '@/util/localStorage';
+import { useStore } from 'vuex';
 
 export default {
     name: 'header-component',
@@ -85,7 +100,6 @@ export default {
             { text: 'Shoes', path: '/listing/shoes' },
             { text: 'Accessories', path: '/listing/accessories' },
         ];
-
         const navIcon = [
             { icon: 'profile', path: '/profile' },
             { icon: 'basket', path: '/basket' },
@@ -95,6 +109,7 @@ export default {
         const searchValue = ref('');
         const listGoods = ref([]);
         const modalGood = ref(null);
+        const store = useStore();
 
         const search = async () => {
             const title = searchValue.value;
@@ -111,6 +126,15 @@ export default {
             modalGood.value = good;
         };
 
+        const allQuantity = computed(() => {
+            return store.state.goodsBasketQuantity >= 99 ? '+99' : store.state.goodsBasketQuantity;
+        });
+
+        onMounted(() => {
+            const goods = LocalStorage.get('goods') || [];
+            store.commit('setBasketQuantity', goods.length > 0 ? getQuantityGoods(goods) : 0)
+        })
+
         return {
             searchValue,
             navbar,
@@ -121,6 +145,7 @@ export default {
             showGood,
             modalGood,
             ModalComponent,
+            allQuantity,
         }
     },
     components: {

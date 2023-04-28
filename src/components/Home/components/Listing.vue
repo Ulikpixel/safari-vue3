@@ -12,9 +12,7 @@
                     <card-ui
                         v-for="good in goods"
                         :key="good.id"
-                        :name="good.title"
-                        :image="good.image"
-                        :price="good.price"
+                        :data="good"
                     />
                 </div>
                 <div class="flex justify-center items-center">

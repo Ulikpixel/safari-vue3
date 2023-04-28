@@ -1,0 +1,1 @@
+export const getQuantityGoods = (list) => list.map(item => item.quantity).reduce((acc, item) => acc + item);

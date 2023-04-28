@@ -1,0 +1,1 @@
+export const proxyToObject = (proxy) => JSON.parse(JSON.stringify(proxy));

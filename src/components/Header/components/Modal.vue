@@ -14,9 +14,7 @@
         />
         <card-ui
             :key="good.id"
-            :name="good.title"
-            :image="good.image"
-            :price="good.price"
+            :good="good"
         />
     </div>
 </template>
