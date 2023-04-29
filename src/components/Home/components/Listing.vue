@@ -26,46 +26,31 @@
 
 
 <script>
-import { request } from '@/util/api';
+import { useGoods } from '@/hooks/useGoods';
 import { minWidth } from '@/util/media';
 import { ref, onMounted, watch } from 'vue';
 
 export default {
     name: 'listing-component',
     setup() {
-        const goods = ref([]);
-        const isLoading = ref(true);
-        const isError = ref(false);
         const page = ref(1);
-        const total = ref(0);
         const limit = minWidth('768') ? 16 : 4;
+        const { 
+            getGoods, 
+            goods, 
+            isLoading, 
+            goodsTotal: total,
+            isError
+        } = useGoods();
 
         const setCurrent = (value) => page.value = value;
-        const getProducts = async (page) => {
-            isLoading.value = true;
-            try {
-                const { data } = await request.get('/goods', {  
-                    params: { 
-                        limit,  
-                        page 
-                    } 
-                });
-
-                goods.value = data.results;
-                total.value = Math.ceil(data.total / limit);
-            } catch (err) {
-                isError.value = true;
-            } finally {
-                isLoading.value = false;
-            }
-        };
 
         onMounted(async () => {
-            await getProducts(page.value);
+            await getGoods({ limit, page: page.value });
         });
 
-        watch(page, async (newValue) => {
-            await getProducts(newValue);
+        watch(page, async (page) => {
+            await getGoods({ limit, page });
         });
 
         return { goods, isLoading, page, setCurrent, total, isError }

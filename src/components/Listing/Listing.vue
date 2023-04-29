@@ -52,62 +52,50 @@
 </template>
 
 <script>
-import { request } from '@/util/api';
-import { ref, onMounted, watch } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import FilterComponent from '@/components/Listing/components/Filter/Filter';
 import { LISTING_FILTER } from '@/components/Listing/constants';
 import { useRoute } from 'vue-router';
 import { minWidth } from '@/util/media';
+import { useGoods } from '@/hooks/useGoods';
 
 export default {
     name: 'listing-component',
     components: { FilterComponent },
     setup() {
+        const limit = minWidth('768') ? 6 : 4;
+        const defaultParams = { 
+            page: 1, 
+            ordering: 'likes', 
+            limit 
+        };
         const defaultFilterState = {
             category: null,
             size: null, 
             color: null,
             price: null,
         }
-        const sort = ref('-price');
-        const goods = ref([]);
-        const isLoading = ref(false);
+
+        const sort = ref('likes');
         const page = ref(1);
-        const goodsTotal = ref(0);
-        const isError = ref(false);
         const route = useRoute();
         const filterState = ref(defaultFilterState);
+        const { 
+            getGoods, 
+            goods, 
+            isLoading, 
+            goodsTotal,
+        } = useGoods();
 
         const optionsSort = [
             { name: 'Most popular', value: 'likes' },
             { name: 'Price: High to Low', value: 'price' },
             { name: 'Price: Low to High', value: '-price' },
         ];
-        const limit = minWidth('768') ? 12 : 4;
 
         const setSort = (option) => sort.value = option.value;
 
         const setPage = (value) => page.value = value;
-
-        const getProducts = async (params = { page: 1, ordering: 'likes' }) => {
-            isLoading.value = true; 
-            try {
-                const { data } = await request.get('goods',{ 
-                    params: { 
-                        ...params, 
-                        limit, 
-                        types: route.params.type,
-                    }
-                });
-
-                goods.value = data.results;
-                goodsTotal.value = Math.ceil(data.total / limit);
-            } catch (err) {
-                isError.value = true;
-            } finally {
-                isLoading.value = false;
-            }
-        };
 
         const setFilter = (key, data) => {
             filterState.value = { ...filterState.value, [key]: data };
@@ -116,37 +104,42 @@ export default {
         const setPrice = (price) => filterState.value = { ...filterState.value, price };
 
         onMounted(async () => {
-            await getProducts();
+            await getGoods({ 
+                ...defaultParams,
+                types: route.params.type,
+                ordering: sort.value, 
+            });
         }); 
 
         watch([sort, page, filterState, route], async (newValue) => {
-            const [, page, filterState, route] = newValue;
+            const [sort, page, filterState, route] = newValue;
             const params = {
+                ...defaultParams,
                 page, 
                 types: route.params.type,
-                ordering: sort.value,
                 ...filterState,
                 ...(filterState?.price && filterState.price),
+                ordering: sort,
             };
 
-            await getProducts(params);
+            await getGoods(params);
         })
 
         watch(route, () => filterState.value = defaultFilterState);
-
+        
         return {
             optionsSort,
             sort,
             setSort,
-            goods,
-            isLoading,
             page,
-            goodsTotal,
             setPage,
             filterData: LISTING_FILTER,
             filterState,
             setFilter,
             setPrice,
+            goods,
+            isLoading,
+            goodsTotal
         };
     },
 }

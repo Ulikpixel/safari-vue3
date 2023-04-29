@@ -1,5 +1,5 @@
 <template>
-    <div class="flex w-[208.7px] justify-between m-auto font-bold">
+    <div class="flex w-[208.6px] justify-between m-auto font-bold">
         <p 
             class="border px-5 py-3 cursor-pointer rounded-l-md" 
             @click="handleClick(false)" 
