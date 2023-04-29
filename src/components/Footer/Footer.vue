@@ -44,7 +44,7 @@ export default {
         const address = ['497 Evergreen Roseville, CA 95673', '+44 345 678 903', 'adobexd@mail.com'];
         const email = ref('');
 
-        const sendEmail = () => console.log(email.value);
+        const sendEmail = () => email.value = "";
 
         return {
             navs,
