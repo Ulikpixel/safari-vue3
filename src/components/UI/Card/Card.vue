@@ -43,6 +43,7 @@ import { ref } from 'vue';
 import { proxyToObject } from '@/util/proxyToObject';
 import { useStore } from 'vuex';
 import { getQuantityGoods } from '@/util/getQuantityGoods';
+import { request } from '@/util/api';
 
 export default {
     name: 'card-ui',
@@ -65,8 +66,17 @@ export default {
                 store.commit('setBasketQuantity', getQuantityGoods(newList))
             }
         }   
+        console.log(good.likes);
+        const setLike = async () => {
+            const id = props.data.id;
 
-        const setLike = () => console.log('setLike');
+            try {
+                const response = await request.get(`/like/${id}`);
+                console.log(response.data);
+            } catch(err) {
+                console.log(err);
+            }
+        };
 
         return {
             hoverCard, parsePrice, addBasket, setLike
@@ -75,7 +85,7 @@ export default {
     props: {
         data: {
             id: Number,
-            like: Boolean,
+            likes: Array,
             name: String,
             price: Number,
             image: String,

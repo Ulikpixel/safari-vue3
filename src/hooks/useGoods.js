@@ -12,7 +12,7 @@ export const useGoods = () => {
         isError.value = false;
 
         try {
-            const { data } = await request.get('/goods', { params });
+            const { data } = await request.get('/goods/', { params });
             goods.value = data.results;
             goodsTotal.value = Math.ceil(data.total / params.limit);
             isLoading.value = false;

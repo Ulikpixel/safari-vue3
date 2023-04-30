@@ -77,7 +77,7 @@ export default {
                 username: body.value.username,
                 password: body.value.password
             };
-            const errors = required.filter((key) => body.value[key]?.length <= 4);
+            const errors = required.filter((key) => body.value[key]?.length <= 2);
             errorFields.value = errors;
 
             if(errors.length > 0) return;

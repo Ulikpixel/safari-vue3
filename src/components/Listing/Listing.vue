@@ -66,7 +66,7 @@ export default {
         const limit = minWidth('768') ? 6 : 4;
         const defaultParams = { 
             page: 1, 
-            ordering: 'likes', 
+            ordering: '-likes', 
             limit 
         };
         const defaultFilterState = {
@@ -76,7 +76,7 @@ export default {
             price: null,
         }
 
-        const sort = ref('likes');
+        const sort = ref('-likes');
         const page = ref(1);
         const route = useRoute();
         const filterState = ref(defaultFilterState);
@@ -88,7 +88,7 @@ export default {
         } = useGoods();
 
         const optionsSort = [
-            { name: 'Most popular', value: 'likes' },
+            { name: 'Most popular', value: '-likes' },
             { name: 'Price: High to Low', value: 'price' },
             { name: 'Price: Low to High', value: '-price' },
         ];
