@@ -12,7 +12,14 @@
                 flex justify-center items-center flex-col gap-3
             "
         >
-            <heart-component @click="setLike" />
+            <heart-component
+                :isLike="isLike" 
+                :id="data.id"
+                @click="setLike"
+                :class="{
+                    'pointer-events-none': isLoading || isError
+                }"
+            />
             <div 
                 class="
                     w-32 h-9 bg-white flex items-center 
@@ -43,7 +50,7 @@ import { ref } from 'vue';
 import { proxyToObject } from '@/util/proxyToObject';
 import { useStore } from 'vuex';
 import { getQuantityGoods } from '@/util/getQuantityGoods';
-import { request } from '@/util/api';
+import { useLike } from '@/hooks/useLike';
 
 export default {
     name: 'card-ui',
@@ -51,6 +58,12 @@ export default {
         const hoverCard = ref(false);
         const good = proxyToObject(props.data);
         const store = useStore();
+        const {
+            isLoading,
+            isError,
+            isLike,
+            toggleLike,
+        } = useLike(good.likes);
 
         const addBasket = () => {
             const list = LocalStorage.get('goods') || [];
@@ -66,20 +79,17 @@ export default {
                 store.commit('setBasketQuantity', getQuantityGoods(newList))
             }
         }   
-        console.log(good.likes);
-        const setLike = async () => {
-            const id = props.data.id;
 
-            try {
-                const response = await request.get(`/like/${id}`);
-                console.log(response.data);
-            } catch(err) {
-                console.log(err);
-            }
-        };
+        const setLike = () => toggleLike(props.data.id);
 
         return {
-            hoverCard, parsePrice, addBasket, setLike
+            hoverCard, 
+            parsePrice, 
+            addBasket,
+            isLike, 
+            setLike,
+            isLoading,
+            isError,
         }
     },
     props: {
