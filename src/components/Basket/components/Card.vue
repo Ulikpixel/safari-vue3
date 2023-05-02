@@ -25,10 +25,6 @@
                             text-pink text-xs lg:flex-row lg:gap-8 xl:text-base xl:gap-16
                         "
                     >
-                        <div class="flex gap-2 items-center cursor-pointer">
-                            <heart-ui className="w-4" />
-                            <p>MOVE TO FAVORITES</p>
-                        </div>
                         <div class="flex gap-2 items-center cursor-pointer" @click="remove">
                             <base-icon name="cross-circle" class="w-4" />
                             <p>REMOVE</p>
