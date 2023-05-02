@@ -16,7 +16,5 @@ export default createStore({
     },
   },
   actions: {},
-  modules: {
-    order: orderModule,
-  },
+  modules: { order: orderModule },
 })
