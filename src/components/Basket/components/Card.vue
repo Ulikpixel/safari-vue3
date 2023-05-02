@@ -26,7 +26,7 @@
                         "
                     >
                         <div class="flex gap-2 items-center cursor-pointer">
-                            <base-icon name="heart-empty" class="w-4" /> 
+                            <heart-ui className="w-4" />
                             <p>MOVE TO FAVORITES</p>
                         </div>
                         <div class="flex gap-2 items-center cursor-pointer" @click="remove">
@@ -75,7 +75,7 @@
                 <p 
                     class="font-bold text-grey-text"
                 >
-                    SUB TOTAL:
+                    UNIT PRICE:
                 </p>
             </div>
             <div 
@@ -97,8 +97,7 @@
             </p>
             <div class="mt-4 text-center lg:hidden">
                 <p 
-                    class="font-bold text-grey-text"
-                >
+                    class="font-bold text-grey-text">
                     SUB TOTAL:
                 </p>
             </div>

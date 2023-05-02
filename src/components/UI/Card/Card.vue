@@ -12,14 +12,15 @@
                 flex justify-center items-center flex-col gap-3
             "
         >
-            <heart-component
-                :isLike="isLike" 
-                :id="data.id"
+            <div
                 @click="setLike"
+                class="w-9 h-9 bg-white flex items-center justify-center cursor-pointer"
                 :class="{
                     'pointer-events-none': isLoading || isError
                 }"
-            />
+            >
+                <heart-ui className="w-4" :isLike="isLike" />
+            </div>
             <div 
                 class="
                     w-32 h-9 bg-white flex items-center 
@@ -43,7 +44,6 @@
 </template>
 
 <script>
-import HeartComponent from '@/components/UI/Card/components/Heart';
 import { LocalStorage } from '@/util/localStorage';
 import { parsePrice } from '@/util/parsePrice';
 import { ref } from 'vue';
@@ -104,8 +104,6 @@ export default {
             color: String,
         }
     },
-    components: {
-        HeartComponent
-    },
+
 }
 </script>

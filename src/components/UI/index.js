@@ -8,6 +8,7 @@ import LoaderComponent from '@/components/UI/Loader/Loader';
 import PaginationComponent from '@/components/UI/Pagination/Pagination';
 import UPComponent from '@/components/UI/UP/UP';
 import BaseIcon from '@/components/UI/BaseIcon/BaseIcon';
+import HeartComponent from '@/components/UI/Heart/Heart';
 
 export default [
     InputComponent,
@@ -19,5 +20,6 @@ export default [
     CardComponent,
     LoaderComponent,
     PaginationComponent,
-    UPComponent
+    UPComponent,
+    HeartComponent
 ];
