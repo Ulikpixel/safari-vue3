@@ -3,6 +3,7 @@ import HomeView from '@/views/HomeView'
 import ListingView from '@/views/ListingView';
 import ProfileView from '@/views/ProfileView';
 import BasketView from '@/views/BasketView';
+import OrderView from '@/views/OrderView';
 
 const routes = [
   {
@@ -20,6 +21,10 @@ const routes = [
   {
     path: '/basket',
     component: <BasketView />
+  },
+  {
+    path: '/order',
+    component: <OrderView />
   }
 ]
 

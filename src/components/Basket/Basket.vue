@@ -59,8 +59,9 @@ import CardComponent from '@/components/Basket/components/Card';
 import { getQuantityGoods } from '@/util/getQuantityGoods';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
-import { computed, onMounted, ref } from 'vue';
+import { computed, onMounted, ref, watch } from 'vue';
 import { LocalStorage } from '@/util/localStorage';
+import { proxyToObject } from '@/util/proxyToObject';
 
 export default {
     name: 'basket-view',
@@ -72,25 +73,29 @@ export default {
 
         const ordering = () => {
             if(store.state.isAuth) {
-                console.log('order'); return;
+                router.push({ path: '/order' });
+            } else {
+                router.push({ path: '/profile' });
             }
-
-            router.push({ path: '/profile' })
         }
 
         const counter = ({ type, id }) => {
             const index = goods.value.findIndex((item) => item.id === id);
+            const list = [...goods.value];
 
             if(index < 0) return;
 
             if(type === 'plus') {
-                goods.value[index].quantity = goods.value[index].quantity + 1;
+                list[index].quantity = list[index].quantity + 1;
+                goods.value = list;
                 return;
             } 
 
-            goods.value[index].quantity = goods.value[index].quantity === 1 
+            list[index].quantity = list[index].quantity === 1 
                 ? 1
-                : goods.value[index].quantity - 1
+                : list[index].quantity - 1
+
+            goods.value = list;
         };
 
         const remove = (id) => {
@@ -105,6 +110,10 @@ export default {
 
         onMounted(() => {
             goods.value = LocalStorage.get('goods') || [];
+        })
+
+        watch(goods, () => {
+            LocalStorage.set('goods', proxyToObject(goods.value));
         })
 
         return {

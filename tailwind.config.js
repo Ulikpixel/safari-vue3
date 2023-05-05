@@ -30,6 +30,10 @@ module.exports = {
     maxWidth: {
       'small-container': '1066px',
     },
+    borderColor: {
+      grey: '#C4C4C4',
+      pink: '#ED165F',
+    },
     container: {
       padding: '20px',
       center: true,
